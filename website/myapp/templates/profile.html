@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | CampusVibes</title>
+
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="icon" href="{% static 'images/logo/cmu.png' %}">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header__brand">
+        <img src="{% static 'images/logo/cmu.png' %}" alt="Logo" class="header__logo">
+        <h1 class="header__title">CampusVibes</h1>
+    </div>
+
+    <nav class="header__nav">
+        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'about' %}">About Us</a>
+        <a href="#">Shop</a>
+    </nav>
+
+    <div class="header__profile">
+        <span class="profile__username">{{ user.username }}</span>
+        <img src="{{ user_avatar }}" alt="Profile" class="profile__avatar" id="profileToggle">
+        <div class="profile__dropdown" id="profileDropdown">
+            <a href="{% url 'profile' %}">Profile</a>
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<main class="profile-page">
+
+    <section class="profile-card">
+
+        <aside class="profile-card__sidebar">
+            <div class="profile-avatar">
+                <img src="{{ user_avatar }}" alt="Profile Picture" class="profile__main-avatar">
+            </div>
+
+            <div class="profile-meta">
+                <p class="profile-meta__username">{{ user.username }}</p>
+                <p class="profile-meta__email">{{ user.email }}</p>
+            </div>
+        </aside>
+
+        <section class="profile-card__content">
+
+            <div class="profile-section">
+                <h2 class="profile-section__title">Profile Information</h2>
+
+                <form method="POST" enctype="multipart/form-data" class="form">
+                    {% csrf_token %}
+                    {% for field in profile_form %}
+                        <div>
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {{ field.errors }}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" name="update_profile" class="btn">
+                        Save Changes
+                    </button>
+                </form>
+            </div>
+
+            <div class="profile-section">
+                <h2 class="profile-section__title">Security</h2>
+
+                <form method="POST" class="form">
+                    {% csrf_token %}
+                    {{ password_form.as_p }}
+                    <button type="submit" name="update_password" class="btn">
+                        Update Password
+                    </button>
+                </form>
+            </div>
+
+            {% if messages %}
+            <ul class="profile__messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        </section>
+    </section>
+
+</main>
+
+<script src="{% static 'js/profile.js' %}" defer></script>
+</body>
+</html>

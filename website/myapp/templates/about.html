@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | CampusVibes</title>
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="icon" href="{% static 'images/logo/cmu.png' %}">
+</head>
+<body>
+<header class="header">
+    <div class="header__brand">
+        <img src="{% static 'images/logo/cmu.png' %}" alt="Logo" class="header__logo">
+        <h1 class="header__title">CampusVibes</h1>
+    </div>
+    <nav class="header__nav">
+        <a href="{% url 'homepage' %}">Home</a>
+        <a href="{% url 'about' %}">About Us</a>
+        <a href="#">Shop</a>
+    </nav>
+    <div class="header__profile">
+        <span class="profile__username">{{ user.username }}</span>
+        <img src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{% static 'images/logo/user.png' %}{% endif %}" 
+             alt="Profile" class="profile__avatar" id="profileToggle">
+        <div class="profile__dropdown" id="profileDropdown">
+            <a href="{% url 'profile' %}">Profile</a>
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<main class="about-page">
+    <section class="about-hero">
+        <div class="about-text">
+            <h1>About Us</h1>
+            <p>CampusVibes is your one-stop shop for exclusive university merchandise. Meet the team behind our brand and discover our story!</p>
+        </div>
+
+        <div class="team-container">
+            <div class="profile-card">
+                <img src="{% static 'images/picture/acaba.jpg' %}" alt="Merch Designer" class="team-img"/>
+                <h2>Kailh</h2>
+                <p>Founder and creative mind behind One Piece Merch. Passionate about delivering quality collectible figures to fans worldwide.</p>
+            </div>
+            <div class="profile-card">
+                <img src="{% static 'images/picture/moral.jpg' %}" alt="Backend Developer" class="team-img"/>
+                <h2>Benjamin</h2>
+                <p>Head of marketing with a knack for storytelling and connecting with our community of true pirates and merch lovers.</p>
+            </div>
+            <div class="profile-card">
+                <img src="{% static 'images/picture/chavez.jpg' %}" alt="FrontEnd Developer" class="team-img"/>
+                <h2>Michael</h2>
+                <p>Operations manager who keeps everything running smoothly behind the scenes and ensures timely delivery of your favorite items.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div id="imgModal" class="modal">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="modalImg">
+    <div id="caption"></div>
+</div>
+
+<script src="{% static 'js/about.js' %}"></script>
+</body>
+</html>

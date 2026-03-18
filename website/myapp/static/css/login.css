@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-image: url('../images/logo/background.jpg');
+    background-repeat: no-repeat;
+    background-position: contain;
+    background-size: auto 100%;
+}
+
+.login-container{
+    width:350px;
+    padding:40px;
+    border-radius:20px;
+
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    border:1px solid rgba(255,255,255,0.2);
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+
+    color:white;
+    text-align:center;
+}
+
+.login-container h2{
+    margin-bottom:20px;
+    font-weight:600;
+}
+
+.login-container p{
+    margin-bottom:10px;
+}
+
+.login-container input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:10px;
+    border:none;
+    outline:none;
+
+    background: rgba(255,255,255,0.2);
+    color:white;
+    font-size:14px;
+}
+
+.login-container input::placeholder{
+    color:#eee;
+}
+
+.login-container button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    background:#ff7a18;
+    background: linear-gradient(90deg, #ff7a18, #ffb347);
+    color:white;
+    font-size:16px;
+    font-weight:500;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.login-container button:hover{
+    transform:scale(1.05);
+    box-shadow:0 5px 15px rgba(0,0,0,0.4);
+}
+
+.login-container a{
+    color:#ffd369;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.login-container a:hover{
+    text-decoration:underline;
+}

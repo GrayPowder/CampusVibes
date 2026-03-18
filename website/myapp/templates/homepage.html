@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusVibes</title>
+
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+    <link rel="icon" href="{% static 'images/logo/cmu.png' %}">
+</head>
+
+<body>
+<header class="header">
+    <div class="header__brand">
+        <img src="{% static 'images/logo/cmu.png' %}" alt="Logo" class="header__logo">
+        <h1 class="header__title">CampusVibes</h1>
+    </div>
+
+    <nav class="header__nav">
+        <a href="#">Home</a>
+        <a href="{% url 'about' %}">About Us</a>
+        <a href="#">Shop</a>
+    </nav>
+
+    <div class="header__profile">
+        <span class="profile__username">{{ user.username }}</span>
+        <img src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{% static 'images/logo/user.png' %}{% endif %}" 
+            alt="Profile" class="profile__avatar" id="profileToggle">
+        <div class="profile__dropdown" id="profileDropdown">
+            <a href="{% url 'profile' %}">Profile</a>
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="home">
+        <div class="home__text">
+            <h4>Show Your Campus Pride in Style!</h4>
+            <h1>Exclusive University Merchandise to Celebrate College Life. 🎓</h1>
+            <a href="#products" class="btn">Explore now</a>
+        </div>
+
+        <div class="home__image">
+            <img src="{% static 'images/logo/cmu_logo.jpg' %}" alt="Monkey D. Luffy">
+        </div>
+    </section>
+</main>
+
+<script src="{% static 'js/homepage.js' %}"></script>
+</body>
+</html>
